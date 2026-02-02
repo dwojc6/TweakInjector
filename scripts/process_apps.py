@@ -75,14 +75,32 @@ def main():
         print(f"Building {app['name']}...")
         
         # 2. Download IPA
-        if not app.get('ipa_source'):
-            print("No IPA source provided, skipping.")
+        ipa_path = os.path.join(BUILD_DIR, "source.ipa")
+        
+        if app.get('ipa_source'):
+            # Direct HTTP Download
+            print(f"Downloading from URL: {app['ipa_source']}")
+            with requests.get(app['ipa_source'], stream=True) as r:
+                with open(ipa_path, 'wb') as f:
+                    shutil.copyfileobj(r.raw, f)
+        elif app.get('app_store_url'):
+            # Telegram Download
+            print(f"Requesting decryption from Telegram for {app['name']}...")
+            env = os.environ.copy()
+            # Ensure these are passed from the workflow
+            cmd = ["python3", "scripts/fetch_ipa.py", app['app_store_url']]
+            try:
+                subprocess.run(cmd, check=True, env=env)
+            except subprocess.CalledProcessError:
+                print(f"❌ Telegram download failed for {app['name']}")
+                continue
+        else:
+            print("No IPA source or App Store URL provided.")
             continue
             
-        ipa_path = os.path.join(BUILD_DIR, "source.ipa")
-        with requests.get(app['ipa_source'], stream=True) as r:
-            with open(ipa_path, 'wb') as f:
-                shutil.copyfileobj(r.raw, f)
+        if not os.path.exists(ipa_path):
+             print("IPA file missing after download step.")
+             continue
 
         # 3. Download Tweaks
         deb_files = []
