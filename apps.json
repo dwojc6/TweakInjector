@@ -1,65 +1,190 @@
-apps:
-  - name: "YouTube"
-    bundle_id: "com.google.ios.youtube"
-    current_version: "21.05.3"
-    ipa_source: "https://example.com/decrypted/youtube.ipa" # Replace with your source
-    tweaks:
-      - type: github_release
-        repo: "dayanch96/YTLite"
-        asset_regex: "YTLite.deb"
-      - type: direct
-        url: "https://example.com/YouPiP.deb"
-    
-  - name: "Instagram"
-    bundle_id: "com.burbn.instagram"
-    current_version: "414.0.0"
-    ipa_source: "https://example.com/decrypted/instagram.ipa"
-    tweaks:
-      - type: github_release
-        repo: "qnblackcat/BHInstagram"
-        asset_regex: "BHInstagram.deb"
-
-  - name: "Twitch"
-    bundle_id: "tv.twitch"
-    current_version: "27.9"
-    ipa_source: "" 
-    tweaks: []
-
-  - name: "TikTok"
-    bundle_id: "com.zhiliaoapp.musically"
-    current_version: "43.6.1"
-    ipa_source: ""
-    tweaks:
-      - type: github_release
-        repo: "Rino01/BHTikTok" # Example
-        asset_regex: "BHTikTok.deb"
-
-  - name: "X"
-    bundle_id: "com.atebits.Tweetie2"
-    current_version: "11.60"
-    ipa_source: ""
-    tweaks: []
-
-  - name: "Reddit"
-    bundle_id: "com.reddit.Reddit"
-    current_version: "2026.04.1"
-    ipa_source: ""
-    tweaks: []
-
-  - name: "CODMunity"
-    bundle_id: "com.convertify.codmobileloadout2"
-    current_version: "9.3.1"
-    ipa_source: ""
-    tweaks: []
-
-  - name: "Google News"
-    bundle_id: "com.google.GoogleDigitalEditions"
-    current_version: "5.113"
-    ipa_source: ""
-    tweaks: []
-
-  - name: "Box Box Club"
-    bundle_id: "club.boxbox.widgets-ios"
-    current_version: "5.3.3"
-    ipa_source: ""
-    tweaks: []
+[
+  {
+    "name": "YouTube",
+    "bundle_id": "com.google.ios.youtube",
+    "current_version": "21.05.3",
+    "app_store_url": "https://apps.apple.com/us/app/youtube/id544007664",
+    "tweaks": [
+      {
+        "type": "direct",
+        "path": "https://github.com/dayanch96/YTLite/releases/download/v5.2b4/com.dvntm.ytlite_5.2b4_iphoneos-arm64.deb"
+      },
+      {
+        "type": "direct",
+        "path": "https://repo.chariz.com/debs/oFYlMd8u-oNSCuxS1z1WSd9CKwpqFMR4ZQhVKlSd5JnCPbuasrzC5IBdlHwTh22-x_HEJQbtjcayZs9U4c_fwQ/com.ps.yougroupsettings_1.0.7_iphoneos-arm64.deb"
+      },
+      {
+        "type": "direct",
+        "path": "https://poomsmart.github.io/repo/debs/youtube/ytabconfig/com.ps.ytabconfig_1.9.1_iphoneos-arm64.deb"
+      },
+      {
+        "type": "direct",
+        "path": "https://poomsmart.github.io/repo/debs/youtube/ytuhd/com.ps.ytuhd_2.2.3_iphoneos-arm64.deb"
+      },
+      {
+        "type": "direct",
+        "path": "https://poomsmart.github.io/repo/debs/youtube/youpip/com.ps.youpip_1.12.10_iphoneos-arm64.deb"
+      },
+      {
+        "type": "direct",
+        "path": "https://poomsmart.github.io/repo/debs/youtube/ytvideooverlay/com.ps.ytvideooverlay_2.3.5_iphoneos-arm64.deb"
+      }
+    ]
+  },
+  {
+    "name": "Instagram",
+    "bundle_id": "com.burbn.instagram",
+    "current_version": "414.0.0",
+    "app_store_url": "https://apps.apple.com/us/app/instagram/id389801252",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/RegramExtension.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/Theta.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/_ipa_by_iosdecrypted_[sideloadKeychainFix].dylib"
+      }
+    ]
+  },
+  {
+    "name": "Twitch",
+    "bundle_id": "tv.twitch",
+    "current_version": "27.9",
+    "app_store_url": "https://apps.apple.com/us/app/twitch/id460177396",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/TwitchAdBlock.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/zxPluginsInject.dylib"
+      }
+    ]
+  },
+  {
+    "name": "TikTok",
+    "bundle_id": "com.zhiliaoapp.musically",
+    "current_version": "43.6.1",
+    "app_store_url": "https://apps.apple.com/us/app/tiktok/id835599320",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/___RXTikTok.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/zxPluginsInject.dylib"
+      }
+    ]
+  },
+  {
+    "name": "X",
+    "bundle_id": "com.atebits.Tweetie2",
+    "current_version": "11.60",
+    "app_store_url": "https://apps.apple.com/us/app/x/id333903271",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/libbhFLEX.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/zxPluginsInject.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/BHTwitter.dylib"
+      }
+    ]
+  },
+  {
+    "name": "Reddit",
+    "bundle_id": "com.reddit.Reddit",
+    "current_version": "2026.04.1",
+    "app_store_url": "https://apps.apple.com/us/app/reddit/id1064216828",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/MadeByMohkg.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/zxPluginsInject.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/sideloadFixerLol.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/MoesReddit.dylib"
+      }
+    ]
+  },
+  {
+    "name": "CODMunity",
+    "bundle_id": "com.convertify.codmobileloadout2",
+    "current_version": "9.3.1",
+    "app_store_url": "https://apps.apple.com/us/app/codmunity-loadout-camo-tracker/id1644373612",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/StopReview.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/zxPluginsInject.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/sideloadKeychainfix.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/Tg_Sa1y0miii.dylib"
+      }
+    ]
+  },
+  {
+    "name": "Google News",
+    "bundle_id": "com.google.GoogleDigitalEditions",
+    "current_version": "5.113",
+    "app_store_url": "https://apps.apple.com/us/app/google-news/id459182288",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/sideloadKeychainfix.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/GoogleNews.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/GoogleNewsPatch.dylib"
+      }
+    ]
+  },
+  {
+    "name": "Box Box Club",
+    "bundle_id": "club.boxbox.widgets-ios",
+    "current_version": "5.3.3",
+    "app_store_url": "https://apps.apple.com/us/app/box-box-club-formula-widgets/id1621241916",
+    "tweaks": [
+      {
+        "type": "local",
+        "path": "dylibs/blatantsPatch.dylib"
+      },
+      {
+        "type": "local",
+        "path": "dylibs/BoxBox.dylib"
+      }
+    ]
+  }
+]
