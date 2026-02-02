@@ -102,14 +102,49 @@ def main():
              print("IPA file missing after download step.")
              continue
 
-        # 3. Download Tweaks
+        # 3. Gather Tweaks (Download or Copy Local)
         deb_files = []
-        for i, url in enumerate(tweaks_to_download):
-            deb_path = os.path.join(BUILD_DIR, f"tweak_{i}.deb")
-            with requests.get(url, stream=True) as r:
-                with open(deb_path, 'wb') as f:
-                    shutil.copyfileobj(r.raw, f)
-            deb_files.append(deb_path)
+        
+        # We need to look at the config's tweak list for this specific app
+        for i, tweak in enumerate(app.get('tweaks', [])):
+            
+            # Define where we want the file to end up for injection
+            dest_filename = f"tweak_{i}.deb"
+            dest_path = os.path.join(BUILD_DIR, dest_filename)
+            
+            if tweak['type'] == 'github_release':
+                url, version = get_latest_github_release(tweak['repo'], tweak['asset_regex'])
+                if url:
+                    print(f"   ⬇️ Downloading {tweak['repo']}...")
+                    with requests.get(url, stream=True) as r:
+                        with open(dest_path, 'wb') as f:
+                            shutil.copyfileobj(r.raw, f)
+                    deb_files.append(dest_path)
+                else:
+                    print(f"   ⚠️ Could not find release for {tweak['repo']}")
+
+            elif tweak['type'] == 'direct':
+                print(f"   ⬇️ Downloading direct file...")
+                with requests.get(tweak['url'], stream=True) as r:
+                    with open(dest_path, 'wb') as f:
+                        shutil.copyfileobj(r.raw, f)
+                deb_files.append(dest_path)
+
+            elif tweak['type'] == 'local':
+                # Handle local file from repo
+                local_source = tweak['path'] # e.g., "debs/Rocket.deb"
+                
+                if os.path.exists(local_source):
+                    print(f"   📂 Using local file: {local_source}")
+                    shutil.copy(local_source, dest_path)
+                    deb_files.append(dest_path)
+                else:
+                    print(f"   ❌ Local file not found: {local_source}")
+                    # You might want to exit or skip here depending on strictness
+            
+        if not deb_files:
+            print("   ⚠️ No tweaks found to inject. Skipping...")
+            continue
 
         # 4. Inject
         output_ipa = os.path.join(BUILD_DIR, "injected.ipa")
