@@ -5,7 +5,7 @@ import subprocess
 import shutil
 
 # Config
-CONFIG_PATH = "config/apps.yml"
+CONFIG_PATH = "config/apps.json"
 BUILD_DIR = "build_temp"
 PIXELDRAIN_KEY = os.environ.get("PIXELDRAIN_API_KEY")
 
